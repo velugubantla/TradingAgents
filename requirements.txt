@@ -1,4 +1,5 @@
 typing-extensions
+apscheduler
 langchain-core
 langchain-openai
 langchain-experimental
@@ -20,3 +21,4 @@ typer
 questionary
 langchain_anthropic
 langchain-google-genai
+pytest
