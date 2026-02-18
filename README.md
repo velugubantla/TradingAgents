@@ -158,6 +158,73 @@ An interface will appear showing results as they load, letting you track the age
   <img src="assets/cli/cli_transaction.png" width="100%" style="display: inline-block; margin: 0 2%;">
 </p>
 
+## Run locally in 5 minutes (Web UI + daily opportunities)
+
+> ⚠️ **Research-only mode:** The local Web UI does **not** place real trades. It is intended for analysis, experimentation, and reviewing generated opportunities.
+
+### 1) Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 2) Set environment variables
+
+```bash
+export TICKERS="NVDA,MSFT,TSLA"
+export RUN_TIME="06:30"
+export TIMEZONE="America/New_York"
+export PROVIDER="openai"
+export DEEP_MODEL="gpt-5.2"
+export QUICK_MODEL="gpt-5-mini"
+export RUN_ON_STARTUP="false"
+```
+
+Optional local demo/testing mode (no paid LLM calls):
+
+```bash
+export DRY_RUN="true"
+```
+
+Optional sqlite path override (default: `./data/tradingagents.db`):
+
+```bash
+export TRADINGAGENTS_DB_PATH="./data/tradingagents.db"
+```
+
+### 3) Start the Web UI
+
+```bash
+make dev
+# or
+python -m app.run_ui
+```
+
+Open the Chainlit app in your browser (default: `http://127.0.0.1:8000`).
+
+### 4) Trigger a run and review history
+
+- Use the **Run now** button on the dashboard (or type `run` in chat).
+- Use **Runs list** to browse paginated history.
+- Open a run detail (for full raw payloads + parsed opportunity fields).
+- Open **Config** to review active env-based configuration.
+
+### 5) Run headless once / inspect data
+
+```bash
+make run-once
+# or
+python -m app.run_once
+```
+
+Inspect the sqlite DB directly:
+
+```bash
+sqlite3 ./data/tradingagents.db ".tables"
+sqlite3 ./data/tradingagents.db "SELECT id, status, tickers, run_date, created_at FROM runs ORDER BY id DESC LIMIT 10;"
+sqlite3 ./data/tradingagents.db "SELECT run_id, ticker, action, confidence, created_at FROM opportunities ORDER BY id DESC LIMIT 20;"
+```
+
 ## TradingAgents Package
 
 ### Implementation Details
