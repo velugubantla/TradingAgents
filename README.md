@@ -197,7 +197,7 @@ export TRADINGAGENTS_DB_PATH="./data/tradingagents.db"
 ```bash
 make dev
 # or
-python -m app.run_ui
+python3 -m app.run_ui
 ```
 
 Open the Chainlit app in your browser (default: `http://127.0.0.1:8000`).
@@ -214,7 +214,7 @@ Open the Chainlit app in your browser (default: `http://127.0.0.1:8000`).
 ```bash
 make run-once
 # or
-python -m app.run_once
+python3 -m app.run_once
 ```
 
 Inspect the sqlite DB directly:

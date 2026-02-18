@@ -1,11 +1,13 @@
+PYTHON ?= python3
+
 .PHONY: dev run-once test
 
 dev:
-	python -m app.run_ui
+	$(PYTHON) -m app.run_ui
 
 run-once:
-	python -m app.run_once
+	$(PYTHON) -m app.run_once
 
 test:
-	pytest -q
+	$(PYTHON) -m pytest -q
 
